@@ -1,0 +1,27 @@
+{
+  "name": "follow-mouse",
+  "version": "0.0.1",
+  "description": "Simple function to create smooth effects for the mouse cursor on your website",
+  "author": "ux-ui.pro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ux-ui-pro/follow-mouse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ux-ui-pro/follow-mouse/issues"
+  },
+  "source": "src/index.js",
+  "module": "dist/module.js",
+  "scripts": {
+    "serve": "parcel watch",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "keywords": [
+    "cursor",
+    "follower"
+  ]
+}
