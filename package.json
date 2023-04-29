@@ -1,6 +1,6 @@
 {
   "name": "follow-mouse",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple function to create smooth effects for the mouse cursor on your website",
   "author": "ux-ui.pro",
   "license": "MIT",
@@ -17,7 +17,8 @@
   "unpkg": "dist/index.umd.js",
   "scripts": {
     "serve": "parcel watch",
-    "build": "parcel build"
+    "build": "parcel build",
+    "clean": "rm -rf dist .parcel-cache"
   },
   "devDependencies": {
     "parcel": "^2.8.3"
