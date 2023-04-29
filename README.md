@@ -38,5 +38,13 @@ new FollowMouse({
 ```
 <br>
 
+### Destroy
+```javascript
+const follower = new FollowMouse()
+
+follower.destroy()
+```
+<br>
+
 ### License
 follow-mouse is released under MIT license
