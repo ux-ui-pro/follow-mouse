@@ -1,4 +1,7 @@
 class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
+    static registerGSAP(gsap1) {
+        $cf838c15c8b009ba$export$2e2bcd8739ae039.gsap = gsap1;
+    }
     constructor(options = {}){
         const { ease: ease = 0.75  } = options;
         this.element = `<div data-follower class="follower"></div>`;

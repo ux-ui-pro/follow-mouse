@@ -1,4 +1,8 @@
-export default class CursorFollow {
+export default class FollowMouse {
+	static registerGSAP(gsap) {
+		FollowMouse.gsap = gsap
+	}
+
 	constructor(options = {}) {
 		const {
 			ease = 0.75
