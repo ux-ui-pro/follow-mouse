@@ -24,8 +24,8 @@ export default class FollowMouse {
 			x: this.pos.x,
 			y: this.pos.y
 		}
-		this.xSet = gsap.quickSetter(this.follower, 'x', 'px')
-		this.ySet = gsap.quickSetter(this.follower, 'y', 'px')
+		this.xSet = this.gsap.quickSetter(this.follower, 'x', 'px')
+		this.ySet = this.gsap.quickSetter(this.follower, 'y', 'px')
 		this.animation()
 
 		window.addEventListener('pointermove', this.move.bind(this))
@@ -43,13 +43,13 @@ export default class FollowMouse {
 	}
 
 	animation() {
-		gsap.set(this.follower, {
+		this.gsap.set(this.follower, {
 			xPercent: -50,
 			yPercent: -50
 		})
 
-		gsap.ticker.add(() => {
-			const dt = 1.0 - Math.pow(this.ease, gsap.ticker.deltaRatio())
+		this.gsap.ticker.add(() => {
+			const dt = 1.0 - Math.pow(this.ease, this.gsap.ticker.deltaRatio())
 
 			this.pos.x += (this.mouse.x - this.pos.x) * dt
 			this.pos.y += (this.mouse.y - this.pos.y) * dt
