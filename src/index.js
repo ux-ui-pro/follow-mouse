@@ -57,4 +57,11 @@ export default class FollowMouse {
 			this.ySet(this.pos.y)
 		})
 	}
+
+	destroy() {
+		window.removeEventListener('pointermove', this.move.bind(this))
+		window.removeEventListener('mouseover', this.style.bind(this))
+		this.gsap.ticker.remove()
+		this.follower.remove()
+	}
 }

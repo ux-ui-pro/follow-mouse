@@ -46,6 +46,12 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
             this.ySet(this.pos.y);
         });
     }
+    destroy() {
+        window.removeEventListener("pointermove", this.move.bind(this));
+        window.removeEventListener("mouseover", this.style.bind(this));
+        this.gsap.ticker.remove();
+        this.follower.remove();
+    }
 }
 
 
