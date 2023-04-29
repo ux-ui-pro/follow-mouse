@@ -8,6 +8,8 @@ export default class FollowMouse {
 			ease = 0.75
 		} = options
 
+		this.gsap = FollowMouse.gsap || window.gsap
+
 		this.element = `<div data-follower class="follower"></div>`
 		this.follower = document.querySelector('[data-follower]') || (() => {
 			document.body.insertAdjacentHTML('beforeend', this.element)

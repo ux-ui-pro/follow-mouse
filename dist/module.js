@@ -4,6 +4,7 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
     }
     constructor(options = {}){
         const { ease: ease = 0.75  } = options;
+        this.gsap = $cf838c15c8b009ba$export$2e2bcd8739ae039.gsap || window.gsap;
         this.element = `<div data-follower class="follower"></div>`;
         this.follower = document.querySelector("[data-follower]") || (()=>{
             document.body.insertAdjacentHTML("beforeend", this.element);
