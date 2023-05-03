@@ -36,7 +36,8 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
     animation() {
         this.gsap.set(this.follower, {
             xPercent: -50,
-            yPercent: -50
+            yPercent: -50,
+            "will-change": "transform"
         });
         this.gsap.ticker.add(()=>{
             const dt = 1.0 - Math.pow(this.ease, this.gsap.ticker.deltaRatio());
