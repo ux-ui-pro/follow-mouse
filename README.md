@@ -8,19 +8,18 @@
 [![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/follow-mouse.svg)](https://github.com/ux-ui-pro/follow-mouse)
 [![NPM Downloads](https://img.shields.io/npm/dm/follow-mouse.svg?style=flat)](https://www.npmjs.org/package/follow-mouse)
 
-<sup><a href="https://bundlephobia.com/package/follow-mouse">0.7kB gzipped</a></sup>
+<sup>0.7kB gzipped</sup>
 <h3><a href="https://codepen.io/ux-ui/full/dygzNmz">Demo</a></h3>
 
 </div>
 <br>
 
 ### Installation
-```javascript
-$ yarn add follow-mouse
 ```
-<sup>or</sup>
-```javascript
 $ npm i follow-mouse
+```
+```
+$ yarn add follow-mouse
 ```
 
 <br>
