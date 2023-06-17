@@ -9,7 +9,6 @@ export default class FollowMouse {
 		} = options
 
 		this.gsap = FollowMouse.gsap || window.gsap
-
 		this.element = `<div data-follower class="follower"></div>`
 		this.follower = document.querySelector('[data-follower]') || (() => {
 			document.body.insertAdjacentHTML('beforeend', this.element)
@@ -29,7 +28,7 @@ export default class FollowMouse {
 		this.animation()
 
 		window.addEventListener('pointermove', this.move.bind(this))
-		window.addEventListener('mouseover', this.style.bind(this))
+		window.addEventListener('pointerover', this.style.bind(this))
 	}
 
 	move(e) {
@@ -38,8 +37,14 @@ export default class FollowMouse {
 	}
 
 	style(e) {
+		let target = e.target
+
+		while (!target.dataset.followerStyle && target !== document.body) {
+			target = target.parentNode
+		}
+
 		this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, '').trim()
-		this.follower.classList.add(`follower--${e.target.dataset.followerStyle || 'default'}`)
+		this.follower.classList.add(`follower--${target.dataset.followerStyle || 'default'}`)
 	}
 
 	animation() {
@@ -61,7 +66,7 @@ export default class FollowMouse {
 
 	destroy() {
 		window.removeEventListener('pointermove', this.move.bind(this))
-		window.removeEventListener('mouseover', this.style.bind(this))
+		window.removeEventListener('pointerover', this.style.bind(this))
 		this.gsap.ticker.remove()
 		this.follower.remove()
 	}

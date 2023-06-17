@@ -33,15 +33,17 @@ class $4fa36e821943b400$export$2e2bcd8739ae039 {
         this.ySet = this.gsap.quickSetter(this.follower, "y", "px");
         this.animation();
         window.addEventListener("pointermove", this.move.bind(this));
-        window.addEventListener("mouseover", this.style.bind(this));
+        window.addEventListener("pointerover", this.style.bind(this));
     }
     move(e) {
         this.mouse.x = e.x;
         this.mouse.y = e.y;
     }
     style(e) {
+        let target = e.target;
+        while(!target.dataset.followerStyle && target !== document.body)target = target.parentNode;
         this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, "").trim();
-        this.follower.classList.add(`follower--${e.target.dataset.followerStyle || "default"}`);
+        this.follower.classList.add(`follower--${target.dataset.followerStyle || "default"}`);
     }
     animation() {
         this.gsap.set(this.follower, {
@@ -59,7 +61,7 @@ class $4fa36e821943b400$export$2e2bcd8739ae039 {
     }
     destroy() {
         window.removeEventListener("pointermove", this.move.bind(this));
-        window.removeEventListener("mouseover", this.style.bind(this));
+        window.removeEventListener("pointerover", this.style.bind(this));
         this.gsap.ticker.remove();
         this.follower.remove();
     }
