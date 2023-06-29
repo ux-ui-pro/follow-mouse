@@ -43,9 +43,9 @@ export default class FollowMouse {
 			target = target.parentNode
 		}
 
-		if (target && target.dataset && target.dataset.followerStyle) {
+		if (target) {
 			this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, '').trim()
-			const followerStyle = target.dataset.followerStyle || 'default'
+			const followerStyle = target.dataset && target.dataset.followerStyle || 'default'
 			this.follower.classList.add(`follower--${followerStyle}`)
 		}
 	}

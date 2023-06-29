@@ -32,9 +32,9 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
     style(e) {
         let target = e.target;
         while(target && (!target.dataset || !target.dataset.followerStyle) && target !== document.body)target = target.parentNode;
-        if (target && target.dataset && target.dataset.followerStyle) {
+        if (target) {
             this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, "").trim();
-            const followerStyle = target.dataset.followerStyle || "default";
+            const followerStyle = target.dataset && target.dataset.followerStyle || "default";
             this.follower.classList.add(`follower--${followerStyle}`);
         }
     }
