@@ -52,8 +52,6 @@ export default class FollowMouse {
 
 	animation() {
 		this.gsap.set(this.follower, {
-			xPercent: -50,
-			yPercent: -50,
 			'will-change': 'transform'
 		})
 
