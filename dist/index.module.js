@@ -3,13 +3,10 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
         $cf838c15c8b009ba$export$2e2bcd8739ae039.gsap = gsap;
     }
     constructor(options = {}){
-        const { ease: ease = 0.75  } = options;
+        const { ease: ease = 0.15  } = options;
         this.gsap = $cf838c15c8b009ba$export$2e2bcd8739ae039.gsap || window.gsap;
-        this.element = `<div data-follower class="follower"></div>`;
-        this.follower = document.querySelector("[data-follower]") || (()=>{
-            document.body.insertAdjacentHTML("beforeend", this.element);
-            return document.querySelector("[data-follower]");
-        })();
+        this.cursorFollower = this.getFollowerElement();
+        this.cursorStyle = this.cursorFollower.querySelector(".cursor-style");
         this.ease = ease;
         this.pos = {
             x: window.innerWidth / 2,
@@ -19,11 +16,24 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
             x: this.pos.x,
             y: this.pos.y
         };
-        this.xSet = this.gsap.quickSetter(this.follower, "x", "px");
-        this.ySet = this.gsap.quickSetter(this.follower, "y", "px");
-        this.animation();
+        this.xSet = this.gsap.quickSetter(this.cursorFollower, "x", "px");
+        this.ySet = this.gsap.quickSetter(this.cursorFollower, "y", "px");
+        this.animationId = null;
         window.addEventListener("pointermove", this.move.bind(this));
         window.addEventListener("pointerover", this.style.bind(this));
+        this.animation();
+    }
+    getFollowerElement() {
+        return document.querySelector("[data-cursor-follower]") || (()=>{
+            const cursorFollower = document.createElement("div");
+            cursorFollower.setAttribute("data-cursor-follower", "");
+            cursorFollower.classList.add("cursor-follower");
+            const cursorStyle = document.createElement("div");
+            cursorStyle.classList.add("cursor-style");
+            cursorFollower.appendChild(cursorStyle);
+            document.body.appendChild(cursorFollower);
+            return cursorFollower;
+        })();
     }
     move(e) {
         this.mouse.x = e.x;
@@ -31,30 +41,29 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
     }
     style(e) {
         let target = e.target;
-        while(target && (!target.dataset || !target.dataset.followerStyle) && target !== document.body)target = target.parentNode;
+        while(target && (!target.dataset || !target.dataset.cursorStyle) && target !== document.body)target = target.parentNode;
         if (target) {
-            this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, "").trim();
-            const followerStyle = target.dataset && target.dataset.followerStyle || "default";
-            this.follower.classList.add(`follower--${followerStyle}`);
+            this.cursorStyle.className = this.cursorStyle.className.replace(/ ?cursor-style--\S*/g, "").trim();
+            const cursorStyle = target.dataset && target.dataset.cursorStyle || "default";
+            this.cursorStyle.classList.add(`cursor-style--${cursorStyle}`);
         }
     }
     animation() {
-        this.gsap.set(this.follower, {
-            "will-change": "transform"
-        });
-        this.gsap.ticker.add(()=>{
-            const dt = 1.0 - Math.pow(this.ease, this.gsap.ticker.deltaRatio());
+        const animate = ()=>{
+            const dt = 1.0 - Math.pow(this.ease, 0.05);
             this.pos.x += (this.mouse.x - this.pos.x) * dt;
             this.pos.y += (this.mouse.y - this.pos.y) * dt;
             this.xSet(this.pos.x);
             this.ySet(this.pos.y);
-        });
+            this.animationId = requestAnimationFrame(animate);
+        };
+        this.animationId = requestAnimationFrame(animate);
     }
     destroy() {
+        cancelAnimationFrame(this.animationId);
         window.removeEventListener("pointermove", this.move.bind(this));
         window.removeEventListener("pointerover", this.style.bind(this));
-        this.gsap.ticker.remove();
-        this.follower.remove();
+        this.cursorFollower.remove();
     }
 }
 
