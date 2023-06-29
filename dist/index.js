@@ -41,9 +41,11 @@ class $4fa36e821943b400$export$2e2bcd8739ae039 {
     }
     style(e) {
         let target = e.target;
-        while(!target.dataset.followerStyle && target !== document.body)target = target.parentNode;
-        this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, "").trim();
-        this.follower.classList.add(`follower--${target.dataset.followerStyle || "default"}`);
+        while(target && !target.dataset?.followerStyle && target !== document.body)target = target.parentNode;
+        if (target && target.dataset?.followerStyle) {
+            this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, "").trim();
+            this.follower.classList.add(`follower--${target.dataset.followerStyle}`);
+        }
     }
     animation() {
         this.gsap.set(this.follower, {
