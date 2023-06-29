@@ -31,10 +31,12 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
     }
     style(e) {
         let target = e.target;
-        while(!target.dataset.followerStyle && target !== document.body)target = target.parentNode;
-        this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, "").trim();
-        const followerStyle = target.dataset.followerStyle || "default";
-        this.follower.classList.add(`follower--${followerStyle}`);
+        while(target && !target.dataset.followerStyle && target !== document.body)target = target.parentNode;
+        if (target) {
+            this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, "").trim();
+            const followerStyle = target.dataset.followerStyle || "default";
+            this.follower.classList.add(`follower--${followerStyle}`);
+        }
     }
     animation() {
         this.gsap.set(this.follower, {
