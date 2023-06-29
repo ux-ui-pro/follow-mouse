@@ -39,14 +39,13 @@ export default class FollowMouse {
 	style(e) {
 		let target = e.target
 
-		while (target && !target.dataset?.followerStyle && target !== document.body) {
+		while (!target.dataset.followerStyle && target !== document.body) {
 			target = target.parentNode
 		}
 
-		if (target && target.dataset?.followerStyle) {
-			this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, '').trim()
-			this.follower.classList.add(`follower--${target.dataset.followerStyle}`)
-		}
+		this.follower.className = this.follower.className.replace(/ ?follower--\S*/g, '').trim()
+		const followerStyle = target.dataset.followerStyle || 'default'
+		this.follower.classList.add(`follower--${followerStyle}`)
 	}
 
 	animation() {
